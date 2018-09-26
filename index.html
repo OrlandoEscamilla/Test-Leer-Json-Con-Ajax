@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>traer json_con_ajax</title>
+</head>
+<body>
+<button onclick="show();">Mostrart</button>
+<div id="contenedor"></div>
+<script type="text/javascript">
+
+function show(){
+var resultado = document.getElementById('contenedor');
+	var xmlhttp;
+	if (window.XMLHttpRequest){
+		xmlhttp = new XMLHttpRequest();
+	}else{
+		xmlhttp = new ActiveXObjet("Microsoft.XMLHTTP");
+	}
+
+	xmlhttp.onreadystatechange = function(){
+		if (xmlhttp.readyState === 4 && xmlhttp.status === 200){
+			var datos = JSON.parse(xmlhttp.responseText);
+			if(resultado.innerHTML == ""){
+			for (var i in datos) {
+				resultado.innerHTML += datos[i].id+" "+datos[i].latitud+" "+datos[i].longitud+"<br>";
+			}
+
+			}
+		}
+	}
+
+	xmlhttp.open("GET", "places.json", true);
+	xmlhttp.send();
+
+
+}
+
+
+</script>
+
+</body>
+</html>
